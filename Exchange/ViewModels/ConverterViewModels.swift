@@ -49,4 +49,23 @@ final class ConverterViewModel {
     }
     
     
+    func loadRate() async {
+        isLoading = true
+        defer { isLoading = false }
+        
+        do {
+            let tickers = try await service.fetchTickers(for: [selectedCurrency])
+            print(tickers)
+            
+            guard let ticker = tickers.first(where: {$0.currencyCode == selectedCurrency}) else {
+                errorMessage = "Валюта не найдена"
+                return
+            }
+                self.rate = ticker.rate
+        } catch {
+            errorMessage = "Не удалось загрузить курс"
+            }
+            
+    }
+    
 }

@@ -19,7 +19,7 @@ struct ExchangeService {
         
         // адрес
         let codes = curriencies.joined(separator: ",")
-        guard let url = URL(string: "\(baseURL)/tickers?curriencies=\(codes)") else {
+        guard let url = URL(string: "\(baseURL)/tickers?currencies=\(codes)") else {
             throw ExchangeError.invalidURL
         }
         
