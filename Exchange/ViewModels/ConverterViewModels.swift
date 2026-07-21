@@ -43,7 +43,7 @@ final class ConverterViewModel {
         }
     }
     
-    private func format(_ value: Decimal) -> String {
+    func format(_ value: Decimal) -> String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .decimal
         formatter.maximumFractionDigits = 2
@@ -62,7 +62,6 @@ final class ConverterViewModel {
         
         do {
             let tickers = try await service.fetchTickers(for: [selectedCurrency])
-            print(tickers)
             
             guard let ticker = tickers.first(where: {$0.currencyCode == selectedCurrency}) else {
                 errorMessage = "Валюта не найдена"
