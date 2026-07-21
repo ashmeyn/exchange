@@ -9,6 +9,7 @@ struct ConverterView: View {
         VStack {
             if viewModel.isUSDOnTop {
                 TextField("0", text: $viewModel.usdAmount)
+                    .keyboardType(.decimalPad)
                     .focused($focusedField, equals: .usd)
                     .onChange(of: viewModel.usdAmount) {
                         guard focusedField == .usd else { return }
@@ -18,6 +19,7 @@ struct ConverterView: View {
                 Button { viewModel.swap() } label: { Text("⇅") }
                 Button { isPickerPresented = true } label: { Text(viewModel.selectedCurrency) }
                 TextField("0", text: $viewModel.otherAmount)
+                    .keyboardType(.decimalPad)
                     .focused($focusedField, equals: .other)
                     .onChange(of: viewModel.otherAmount) {
                         guard focusedField == .other else { return }
@@ -27,6 +29,7 @@ struct ConverterView: View {
             } else {
                 Button { isPickerPresented = true } label: { Text(viewModel.selectedCurrency) }
                 TextField("0", text: $viewModel.otherAmount)
+                    .keyboardType(.decimalPad)
                     .focused($focusedField, equals: .other)
                     .onChange(of: viewModel.otherAmount) {
                         guard focusedField == .other else { return }
@@ -35,6 +38,7 @@ struct ConverterView: View {
                 }
                 Button { viewModel.swap() } label: { Text("⇅") }
                 TextField("0", text: $viewModel.usdAmount)
+                    .keyboardType(.decimalPad)
                     .focused($focusedField, equals: .usd)
                     .onChange(of: viewModel.usdAmount) {
                         guard focusedField == .usd else { return }

@@ -25,14 +25,14 @@ final class ConverterViewModel {
                 
         switch editingField {
         case .usd:
-            guard let usdValue = Decimal(string: usdAmount) else {
+            guard let usdValue = Decimal(string: usdAmount, locale: .current) else {
                 return
             }
             let result = usdValue * rate
             otherAmount = format(result)
             
         case .other:
-            guard let otherValue = Decimal(string: otherAmount) else {
+            guard let otherValue = Decimal(string: otherAmount, locale: .current) else {
                 return
             }
             guard rate != 0 else {
