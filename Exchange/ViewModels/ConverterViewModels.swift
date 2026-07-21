@@ -10,7 +10,7 @@ final class ConverterViewModel {
     
     private let service = ExchangeService()
     
-    let availableCurrencies = ["MXN", "ARS", "COP", "BRL", "EUR"]
+    let availableCurrencies = ["MXN", "ARS", "COP", "BRL", "EURC"]
     var usdAmount: String = ""
     var otherAmount: String = ""
     var selectedCurrency: String = "MXN"
@@ -29,7 +29,7 @@ final class ConverterViewModel {
                 return
             }
             let result = usdValue * rate
-            otherAmount = "\(result)"
+            otherAmount = format(result)
             
         case .other:
             guard let otherValue = Decimal(string: otherAmount) else {
@@ -39,8 +39,16 @@ final class ConverterViewModel {
                 return
             }
             let result = otherValue / rate
-            usdAmount = "\(result)"
+            usdAmount = format(result)
         }
+    }
+    
+    private func format(_ value: Decimal) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 2
+        formatter.minimumFractionDigits = 2
+        return formatter.string(from: NSDecimalNumber(decimal: value)) ?? "\(value)"
     }
     
     func swap() {

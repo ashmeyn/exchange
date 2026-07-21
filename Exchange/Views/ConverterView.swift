@@ -57,5 +57,6 @@ struct ConverterView: View {
                 }
             )
         }
+        .task { await viewModel.loadRate() }
     }
 }
